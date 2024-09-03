@@ -42,11 +42,11 @@ export const Navbar = () => {
   }, []);
 
   const linkClasses = (linkName) =>
-    `hover:text-[#20B486] ${activeLink === linkName ? 'text-[#20B486]' : 'text-[#6D737A]'}`;
+    `hover:text-[#FFC107] ${activeLink === linkName ? 'text-[#FFC107]' : 'text-white'}`;
 
   return (
     <div className='fixed w-full'>
-      <div className='w-full mx-auto bg-black z-50 bg-black
+      <div className='w-full mx-auto bg-[#085526] z-50 bg-black
        py-2 border border-x-0 border-b-1'>
         <div className="sticky h-[50px] flex items-center justify-between w-[90%] mx-auto">
           <h3 className="text-[20px] font-pt-serif">
@@ -83,7 +83,7 @@ export const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to="./courseshold"
+                  to="./Qui"
                   onClick={() => setActiveLink('Qui somme nous ?')}
                   className={linkClasses('Qui somme nous ?')}
                 >
