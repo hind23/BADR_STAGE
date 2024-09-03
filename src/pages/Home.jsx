@@ -1,11 +1,11 @@
-import { Navbar } from "../components/Navbar"
-
-
+import { Form } from "../components/Form"
 export const Home =()=>{
 
 
     return (
-<div><Navbar/> <h1 className="font-bold">helloo</h1></div>
+<div className="bg-[#f8f9fa]">
+<Form/>
+</div>
         
     )
 }
