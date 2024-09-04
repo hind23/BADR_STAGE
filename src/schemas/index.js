@@ -1,10 +1,9 @@
 import * as yup from 'yup';
 export const basicschema=yup.object().shape({
-    email : yup.string().email("please enter a valid email !").required("This field is required !"),
-    num :  yup.string().length(10,"short").required("This field is required")
+    email : yup.string().email("S'il vous plait entrez un email valide !").required("Ce champs est obligatoire !"),
+    num :  yup.string().length(10,"short").required("Ce champs est obligatoire !")
    ,
-   confirmpassword : yup.string().oneOf([yup.ref("password"),null],"Passwords must match").required("This field is required"),
-   Prenom : yup.string().required("This field is required !"),
-   Nom : yup.string().required("This field is required !"),
+   Prenom : yup.string().required("Ce champs est obligatoire !"),
+   Nom : yup.string().required("Ce champs est obligatoire !"),
    
 })

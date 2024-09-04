@@ -18,25 +18,12 @@ export const Form = () => {
   });
 
   return (
-    <div className="bg-[#f8f9fa] ">
+    <div className="bg-[#f8f9fa] font-roboto">
+      <h1 className="text-center underline text-[25px] text-[#085526] font-bold mb-5">Simulateur du financement islamique</h1>
 
-<form onSubmit={formik.handleSubmit} className="flex w-[90vw] items-center mx-auto flex-col space-y-4">
+<form onSubmit={formik.handleSubmit} className="flex w-[90vw] items-center mx-auto flex-col space-y-4 mb-10">
     <div className="flex flex-col space-y-1">
-    <label className="text-[#202121]/80 text-left text-[14px]" htmlFor="email">
-Email :
-           </label>
-      <input className="border text-[#202121]/80 xxs:w-[300px] w-[200px] lg:w-[400px] placeholder:text-[12px] text-[16px]   rounded-[2px] focus:outline-none p-3"
-        id="email"
-        name="email"
-        type="email"
-        value={formik.values.email}
-        onChange={formik.handleChange}
-        placeholder="Veuillez introduire votre email"
-      />
-      {formik.errors.email && formik.touched.email && (
-        <div className="text-red-500 text-[12px]">{formik.errors.email}</div>
-      )}
-    </div>
+    
     <div className="flex flex-col space-y-1">
 <label className="text-[#202121]/80 text-[14px]" htmlFor="Nom">
 Nom :
@@ -55,6 +42,7 @@ Nom :
       </div>
 
       <div className="flex flex-col space-y-1">
+
 <label className="text-[#202121]/80 text-[14px]" htmlFor="Prénom">
 Prénom :
            </label>
@@ -87,8 +75,22 @@ Numéro de téléphone :
         <div className="text-red-500 text-[12px]">{formik.errors.num}</div>
       )}
       </div>
-
-      <button type="submit" className="bg-[#20b486] text-white  px-[60px] py-[8px]">Confirmer</button>
+<label className="text-[#202121]/80 text-left text-[14px]" htmlFor="email">
+Email :
+           </label>
+      <input className="border text-[#202121]/80 xxs:w-[300px] w-[200px] lg:w-[400px] placeholder:text-[12px] text-[16px]   rounded-[2px] focus:outline-none p-3"
+        id="email"
+        name="email"
+        type="email"
+        value={formik.values.email}
+        onChange={formik.handleChange}
+        placeholder="Veuillez introduire votre email"
+      />
+      {formik.errors.email && formik.touched.email && (
+        <div className="text-red-500 text-[12px]">{formik.errors.email}</div>
+      )}
+    </div>
+      <button type="submit" className="bg-[#085526] text-white  px-[60px] py-[8px]">Confirmer</button>
     </form>
     </div>
    

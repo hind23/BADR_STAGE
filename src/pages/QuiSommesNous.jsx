@@ -3,10 +3,11 @@ export const QuiSommesNous=()=>
 {
     return (
         <>
-<Navbar/>
+        <div className="font-roboto">
         <h1>
         QuiSommesNous  
         </h1>
+        </div>
         </>
     )
 }

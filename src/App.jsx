@@ -1,10 +1,11 @@
-import { Home } from "./pages/Home"
 import { Routes } from 'react-router-dom';
 import { Route ,Navigate} from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { QuiSommesNous } from "./pages/QuiSommesNous";
 import { Accueil } from "./pages/Acceuil";
 import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
+import { Simulateur } from "./pages/simulateur";
 function App() {
 
   return (
@@ -15,11 +16,14 @@ function App() {
             < div className="mb-[50px]"> </div>
           
         <Routes> 
-        <Route path="/" element={<Home/>}/>
-        <Route path="/Qui" element={<QuiSommesNous/>}/>
-        <Route path="/Accueil" element={<QuiSommesNous/>}/>
+        <Route path="/qui" element={<QuiSommesNous/>}/>
+        <Route path="/" element={<Accueil/>}/>
+        <Route path="/simulateur" element={<Simulateur/>}/>
+
+
           
         </Routes> 
+        <Footer/>
          </div>
       </Router>
     </>

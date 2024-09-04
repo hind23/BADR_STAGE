@@ -2,7 +2,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { SearchBar } from './SearchBar';
 import { useEffect, useState } from 'react';
-import algiers from '/logo.png';
 import menu from '/menu.svg';
 import close from '/close.svg';
 import logo from '/logo.png'
@@ -44,8 +43,8 @@ export const Navbar = () => {
     `hover:text-[#FFC107] ${activeLink === linkName ? 'text-[#FFC107]' : 'text-white'}`;
 
   return (
-    <div className='fixed  bg-[#085526]  top-0  w-full'>
-      <div className='w-full  mx-auto bg-[#085526] z-50 
+    <div className="fixed  bg-[#085526]  top-0  w-full font-roboto ">
+      <div className='w-full flex items-center h-16 mx-auto bg-[#085526] z-50 
        border border-x-0  border-b-1'>
         <div className="sticky bg-[#085526] h-[50px] flex items-center justify-between w-[90%] mx-auto">
           <h3 className="text-[20px] font-pt-serif">
@@ -83,7 +82,7 @@ export const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to="/Qui"
+                  to="/qui"
                   onClick={() => setActiveLink('Qui somme nous ?')}
                   className={linkClasses('Qui somme nous ?')}
                 >
@@ -92,11 +91,11 @@ export const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to="/users"
-                  onClick={() => setActiveLink('User Management')}
-                  className={linkClasses('User Management')}
+                  to="/simulateur"
+                  onClick={() => setActiveLink('Simulateur')}
+                  className={linkClasses('Simulateur')}
                 >
-                  User Management
+                  Simulateur
                 </Link>
               </li>
             </ul>
