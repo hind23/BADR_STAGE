@@ -14,8 +14,8 @@ import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   return (
-    <footer className="bg-[#085526] py-8 font-['Lato']">
-      <div className="container mx-auto flex flex-col md:flex-row justify-center items-center space-x-60 mb-20">
+    <footer className="bg-[#085526]  py-8 font-['Lato']">
+      <div className="container mx-auto flex flex-col md:flex-row justify-center items-center space-x-60 w-[90%] mb-20">
         {/* Social Media Links */}
         <div className='space-x-20 flex justify-center'>
           <div className='space-y-4 mt-20'>

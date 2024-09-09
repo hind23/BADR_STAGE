@@ -6,6 +6,7 @@ import { Accueil } from "./pages/Acceuil";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Simulateur } from "./pages/simulateur";
+import { Otp } from './pages/Otp';
 function App() {
 
   return (
@@ -19,9 +20,7 @@ function App() {
         <Route path="/qui" element={<QuiSommesNous/>}/>
         <Route path="/" element={<Accueil/>}/>
         <Route path="/simulateur" element={<Simulateur/>}/>
-
-
-          
+        <Route path="/otp" element={<Otp/>}/>
         </Routes> 
         <Footer/>
          </div>
