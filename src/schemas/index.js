@@ -6,6 +6,7 @@ export const basicschema=yup.object().shape({
    Nom : yup.string().required("Ce champs est obligatoire !"),
    salaire : yup.string().required("Ce champs est obligatoire !"),
    SalaireCod : yup.string().required("Ce champs est obligatoire !"),
-
+   Agecod : yup.string().required("Ce champs est obligatoire !"),
+   jiddia: yup.string().required("Ce champs est obligatoire !"),
    
 })

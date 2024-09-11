@@ -129,10 +129,10 @@ export const Navbar = () => {
           <li className='text-center'>
             <Link
               to="/"
-              onClick={() => setActiveLink('User Management')}
-              className={linkClasses('User Management')}
+              onClick={() => setActiveLink('Simulateur')}
+              className={linkClasses('Simulateur')}
             >
-              User Management
+              Simulateur
             </Link>
           </li>
           <li className='w-8 mx-auto'>

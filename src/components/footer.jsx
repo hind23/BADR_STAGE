@@ -14,8 +14,8 @@ import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   return (
-    <footer className="bg-[#085526] py-8 font-['Lato']">
-      <div className="container mx-auto flex flex-col md:flex-row justify-center items-center space-x-60 mb-20">
+    <footer className="bg-[#085526]  py-4 font-roboto">
+      <div className="container  w-[90%] mx-auto flex flex-col md:flex-row justify-center items-center space-x-60 mb-20">
         {/* Social Media Links */}
         <div className='space-x-20 flex justify-center'>
           <div className='space-y-4 mt-20'>
@@ -65,15 +65,21 @@ export const Footer = () => {
 
           <div className="flex items-center">
             {/* Navigation Links */}
-            <ul className="flex flex-col  space-y-4 text-white">
-              <li className="font-bold text-white text-[24px]">Conditions de banque</li>
-              <li className="text-[16px] cursor-pointer">
-                <a className="hover:text-[#ffc107]">Pour particuliers</a>
-              </li>
-              <li className="text-[16px] cursor-pointer">
-                <a  className="hover:text-[#ffc107]">Pour entreprises</a>
-              </li>
-            </ul>
+            
+  <a
+    href="/documents/Condition-de-banque-finance-islamique-1.pdf"
+    target="blank"
+    rel="noopener noreferrer"
+    
+    className="hover:text-[#ffc107] text-center font-bold text-white text-[24px]"
+  >
+    Conditions de la banque
+  </a>
+
+
+              
+
+            
           </div>
         </div>
 

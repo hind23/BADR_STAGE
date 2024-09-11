@@ -2,6 +2,8 @@ import { basicschema } from "../schemas/index";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useRef } from "react";
+import { SliderComponent } from "./slider";
+import badr from "/businessman-badr.jpg"
 export const Form = () => {
   const refYes = useRef();
   const refNo = useRef();
@@ -14,7 +16,9 @@ export const Form = () => {
       Prenom: "",
       num: "",
       salaire: "",
-      SalaireCod:""
+      SalaireCod:"",
+      Agecod:"",
+      jiddia:""
     },
     validationSchema: basicschema,
     onSubmit: (values) => {
@@ -79,15 +83,26 @@ export const Form = () => {
     }
   };
 
+
+  const [YesJiddia, setYesJiddia] = useState(false);
+  const handleCheckboxChange = (e) => {
+    setYesJiddia(e.target.checked);
+  };
+
   return (
-    <div className="bg-[#f8f9fa] font-roboto">
+    <div className=" font-roboto h-fit" style={{
+      backgroundImage: `url(${badr})`,  // Utilisation correcte de l'URL
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+     
+    }} >
       <h1 className="text-center underline text-[25px] text-[#085526] font-bold mb-5">
         Simulateur du financement islamique
       </h1>
 
       <form
         onSubmit={formik.handleSubmit}
-        className="flex w-[90vw] items-center mx-auto flex-col space-y-4 mb-10"
+        className="flex w-[90vw] items-center mx-auto flex-col space-y-4 mb-10 font-roboto"
       >
         <div className="flex flex-col space-y-1">
           <div className="flex flex-col space-y-1">
@@ -249,7 +264,7 @@ export const Form = () => {
         {YesCodebiteur && (
           <div className="flex flex-col space-y-1 mt-4">
          <label className="text-[#202121]/80 text-[14px]" htmlFor="SalaireCod">
-           Revenu du codebiteur en DA:
+           Revenu du codebiteur en DA :
             </label>
             <input
               className="border border-[#085526]/50 placeholder-[#085526]/50 text-[#202121]/80 xxs:w-[300px] w-[200px] lg:w-[400px] placeholder:text-[12px] text-[16px] rounded-[2px] focus:outline-none p-3"
@@ -265,9 +280,29 @@ export const Form = () => {
                 {formik.errors.SalaireCod}
               </div>
             )}
-          </div>
-        )}
 
+
+<label className="text-[#202121]/80 text-[14px]" htmlFor="SalaireCod">
+           Age codebiteur :
+            </label>
+            <input
+              className="border border-[#085526]/50 placeholder-[#085526]/50 text-[#202121]/80 xxs:w-[300px] w-[200px] lg:w-[400px] placeholder:text-[12px] text-[16px] rounded-[2px] focus:outline-none p-3"
+              id="Agecod"
+              name="Agecod"
+              type="text"
+              value={formik.values.Agecod}
+              onChange={formik.handleChange}
+              placeholder="Veuillez introduire l'age du codebiteur"
+            />
+            {formik.errors.Agecod && formik.touched.Agecod && (
+              <div className="text-red-500 text-[12px]">
+                {formik.errors.Agecod}
+              </div>
+            )}
+          </div>
+
+          
+        )}
 
 <div className="flex flex-col items-center space-y-4">
           <label className="text-[#202121]/80 text-left text-[14px] font-bold">
@@ -314,7 +349,7 @@ export const Form = () => {
         </div>
     
         <div className="mt-6 flex flex-col space-y-2">
-          <label className="text-[#202121]/80 text-[14px] font-semibold">Type de Crédit :</label>
+          <label className="text-[#202121]/80 text-[14px]">Type de Crédit :</label>
           <button
             type="button"
             className="border border-[#085526]/50 text-[#202121]/80 p-3 rounded-[2px] bg-white shadow-sm flex justify-between [300px] w-[200px] lg:w-[400px] items-center"
@@ -345,17 +380,50 @@ export const Form = () => {
             </div>
           )}
         </div>
-     
+        <SliderComponent label="Durée de paiement" min={0} max={60} unit="mois"/>
+ 
+        <div className="mt-6 flex flex-row space-x-2 ">
+      <label className="text-[#202121]/80 font-semibold text-[14px]">Marge de bon fin (Hamish el jiddia) :</label>
+        <input
+          type="checkbox"
+          checked={YesJiddia}
+          onChange={handleCheckboxChange}
+        />
+        
+      
+    
+    </div>
+    <div>{YesJiddia ? ( <div className="flex flex-col space-y-1">
+          <label className="text-[#202121]/80 text-[14px]" htmlFor="jiddia">
+            Hamish el Jiddia en DA:
+          </label>
+          <input
+            className="border border-[#085526]/50 placeholder-[#085526]/50 text-[#202121]/80 xxs:w-[300px] w-[200px] lg:w-[400px] placeholder:text-[12px] text-[16px] rounded-[2px] focus:outline-none p-3"
+            id="jiddia"
+            name="jiddia"
+            type="text"
+            value={formik.values.jiddia}
+            onChange={formik.handleChange}
+            placeholder="Veuillez introduire hamish el jiddia"
+          />
+          {formik.errors.jiddia && formik.touched.jiddia && (
+            <div className="text-red-500 text-[12px]">{formik.errors.jiddia}</div>
+          )}
+        </div>):''}</div>     
+       
 
 
      <div className="space-x-8 ">
-        <button type="submit" className="bg-[#085526] text-white px-[60px] py-[8px] shadow-md">
+        <button type="submit" className="bg-[#085526] text-white px-[60px] py-[8px] shadow-md mb-10" >
           Calculer
         </button>
         <button type="submit" className="bg-white text-black px-[60px] py-[8px] shadow-md">
           Annuler
         </button>
         </div>
+        <h1 className="text-center underline text-[25px] text-[#085526] font-bold mb-5">
+        Résultat de la simulation :
+      </h1>
       </form>
     </div>
   );
