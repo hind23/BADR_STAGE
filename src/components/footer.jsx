@@ -63,27 +63,22 @@ export const Footer = () => {
             </div>
           </div>
 
-          <div className="flex items-center">
+  <div className="flex items-center">
             {/* Navigation Links */}
-            
+   <div >
+  <p className="font-bold text-white text-[24px]">
+    Conditions&nbsp;bancaires
+  </p>
   <a
     href="/documents/Condition-de-banque-finance-islamique-1.pdf"
-    target="blank"
-    rel="noopener noreferrer"
-    
-    className="hover:text-[#ffc107] text-center font-bold text-white text-[24px]"
+    download
+    className="hover:text-[#ffc107] text-white text-sm"
   >
-    Conditions de la banque
+    Télécharger
   </a>
-
-
-              
-
-            
+</div>          
           </div>
         </div>
-
-        {/* Logo and Company Name */}
         <div className="mb-4 md:mb-0 mt-10 ">
         <img
                 src={logo}

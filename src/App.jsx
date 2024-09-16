@@ -11,10 +11,8 @@ function App() {
   return (
     <>
    <Router>
-          <div className="bg-[#f8f9fa] min-h-screen mt-10 flex flex-col   ">
-            <Navbar/>
-            < div className="mb-[50px]"> </div>
-          
+          <div className="bg-[#f8f9fa] min-h-screen flex flex-col   ">
+            <Navbar/>          
         <Routes> 
         <Route path="/qui" element={<QuiSommesNous/>}/>
         <Route path="/" element={<Accueil/>}/>

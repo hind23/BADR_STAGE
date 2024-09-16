@@ -3,7 +3,7 @@ export const QuiSommesNous=()=>
 {
     return (
         <>
-        <div className="font-roboto">
+        <div className="font-roboto mt-8">
         <h1>
         QuiSommesNous  
         </h1>

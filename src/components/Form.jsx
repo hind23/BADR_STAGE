@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { useRef } from "react";
 import { SliderComponent } from "./slider";
-import badr from "/businessman-badr.jpg"
+import badr from "/bg_badr.svg"
 export const Form = () => {
   const refYes = useRef();
   const refNo = useRef();
@@ -91,12 +91,17 @@ export const Form = () => {
 
   return (
     <div className=" font-roboto h-fit" style={{
-      backgroundImage: `url(${badr})`,  // Utilisation correcte de l'URL
+      backgroundImage: `url(${badr})`, 
       backgroundSize: 'cover',
       backgroundPosition: 'center',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      
      
     }} >
-      <h1 className="text-center underline text-[25px] text-[#085526] font-bold mb-5">
+      
+      <h1 className="text-center underline text-[25px] text-[#085526] font-bold mb-5 mt-20">
         Simulateur du financement islamique
       </h1>
 
@@ -351,13 +356,15 @@ export const Form = () => {
         <div className="mt-6 flex flex-col space-y-2">
           <label className="text-[#202121]/80 text-[14px]">Type de Crédit :</label>
           <button
-            type="button"
-            className="border border-[#085526]/50 text-[#202121]/80 p-3 rounded-[2px] bg-white shadow-sm flex justify-between [300px] w-[200px] lg:w-[400px] items-center"
-            onClick={toggleDropdown}
-          >
-            {selectedCreditType ? selectedCreditType : "Sélectionner un type de crédit"}
-            <span className="ml-2">{showDropdown ? "▲" : "▼"}</span>
-          </button>
+  type="button"
+  className="border border-[#085526]/50 text-[#202121]/80 p-3 rounded-[2px] bg-white shadow-sm flex justify-between w-[200px] lg:w-[400px] items-center"
+  onClick={toggleDropdown}
+>
+  <span className={selectedCreditType ? "text-[#202121]/80" : "text-[#085526]/50 text-[14px] text-sm"}>
+    {selectedCreditType ? selectedCreditType : "Sélectionner un type de crédit"}
+  </span>
+  <span className="ml-2">{showDropdown ? "▲" : "▼"}</span>
+</button>
 
           {showDropdown && (
             <div className="border border-[#085526]/50 bg-white shadow-lg rounded-[2px] mt-2 w-full">
@@ -421,9 +428,7 @@ export const Form = () => {
           Annuler
         </button>
         </div>
-        <h1 className="text-center underline text-[25px] text-[#085526] font-bold mb-5">
-        Résultat de la simulation :
-      </h1>
+       
       </form>
     </div>
   );
