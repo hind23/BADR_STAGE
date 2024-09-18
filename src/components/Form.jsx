@@ -151,6 +151,26 @@ export const Form = () => {
           </div>
 
           <div className="flex flex-col space-y-1">
+            <label className="text-[#202121]/80 text-[14px]" htmlFor="age">
+              Age :
+            </label>
+            <input
+              className="border border-[#085526]/50 placeholder-[#085526]/50 text-[#202121]/80 xxs:w-[300px] w-[200px] lg:w-[400px] placeholder:text-[12px] text-[16px] rounded-[2px] focus:outline-none p-3"
+              id="age"
+              name="age"
+              type="text"
+              value={formik.values.age}
+              onChange={formik.handleChange}
+              placeholder="Veuillez introduire votre age"
+            />
+            {formik.errors.age && formik.touched.age && (
+              <div className="text-red-500 text-[12px]">
+                {formik.errors.age}
+              </div>
+            )}
+          </div>
+
+          <div className="flex flex-col space-y-1">
             <label className="text-[#202121]/80 text-[14px]" htmlFor="num">
               Numéro de téléphone :
             </label>
@@ -286,7 +306,6 @@ export const Form = () => {
               </div>
             )}
 
-
 <label className="text-[#202121]/80 text-[14px]" htmlFor="SalaireCod">
            Age codebiteur :
             </label>
@@ -308,6 +327,28 @@ export const Form = () => {
 
           
         )}
+
+        <div className="flex flex-col space-y-1">
+            <label className="text-[#202121]/80 text-[14px]" htmlFor="credit">
+              Crédit:
+            </label>
+            <input
+              className="border border-[#085526]/50 placeholder-[#085526]/50 text-[#202121]/80 xxs:w-[300px] w-[200px] lg:w-[400px] placeholder:text-[12px] text-[16px] rounded-[2px] focus:outline-none p-3"
+              id="credit"
+              name="credit"
+              type="text"
+              value={formik.values.credit}
+              onChange={formik.handleChange}
+              placeholder="Veuillez introduire le credit que veuillez emprunter"
+            />
+            {formik.errors.credit && formik.touched.credit && (
+              <div className="text-red-500 text-[12px]">
+                {formik.errors.credit}
+              </div>
+            )}
+          </div>
+
+
 
 <div className="flex flex-col items-center space-y-4">
           <label className="text-[#202121]/80 text-left text-[14px] font-bold">
