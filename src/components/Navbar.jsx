@@ -15,17 +15,13 @@ export const Navbar = () => {
     setVisible(!visible);
   };
 
-  const getEmailUsername = () => {
-    return ["Bendahmene Nesrine", "ln_bendahmane@esi.dz"];
-  };
+
 
   const goToProfile = () => {
     navigate('/admin/profil'); // Navigate to profile page
   };
 
-  const logOut = () => {
-    // Handle logout logic
-  };
+
 
   const onResize = () => {
     if (window.innerWidth >= 640) setVisible(false);
@@ -129,10 +125,10 @@ export const Navbar = () => {
           <li className='text-center'>
             <Link
               to="/"
-              onClick={() => setActiveLink('User Management')}
-              className={linkClasses('User Management')}
+              onClick={() => setActiveLink('Simulateur')}
+              className={linkClasses('Simulateur')}
             >
-              User Management
+              Simulateur
             </Link>
           </li>
           <li className='w-8 mx-auto'>
