@@ -1,12 +1,10 @@
 import { basicschema } from "../schemas/index";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { useRef } from "react";
 import { SliderComponent } from "./slider";
 import badr from "/bg_badr.svg"
 export const Form = () => {
-  const refYes = useRef();
-  const refNo = useRef();
+  const [formData, setFormData] = useState({});
 
   const formik = useFormik({
     initialValues: {
@@ -23,9 +21,32 @@ export const Form = () => {
     validationSchema: basicschema,
     onSubmit: (values) => {
       console.log('Form values:', values);
-      // Handle form submission logic
+
+      // Store the form data in a state variable
+      setFormData(values);
+
+      // You can call other functions here and pass form data to them
+      handleDataManipulation(values);
+      
     },
   });
+  const goToResults = () => {
+    navigate('/simulateur/resultats'); // Navigate to profile page
+  };
+
+  const handleDataManipulation = (data) => {
+    // Here, you can perform calculations or data manipulation
+    const age = parseInt(data.age, 10);
+    const salary = parseFloat(data.salaire);
+
+    console.log(`Age: ${age}, Salaire: ${salary}`);
+
+    // Example: Add 10% to the salary
+    const adjustedSalary = salary * 1.1;
+    console.log(`Adjusted Salary: ${adjustedSalary}`);
+    
+    // Further logic with manipulated data...
+  };
 
   const [YesCodebiteur, setYesCodebiteur] = useState(false);
 
@@ -462,7 +483,7 @@ export const Form = () => {
 
 
      <div className="space-x-8 ">
-        <button type="submit" className="bg-[#085526] text-white px-[60px] py-[8px] shadow-md mb-10" >
+        <button type="submit" className="bg-[#085526] text-white px-[60px] py-[8px] shadow-md mb-10" onClick={() => goToResults()}>
           Calculer
         </button>
         <button type="submit" className="bg-white text-black px-[60px] py-[8px] shadow-md">
