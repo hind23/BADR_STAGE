@@ -10,38 +10,39 @@ import adresse from '/adresse.svg'
 
 
 // If using React Router for navigation
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 export const Footer = () => {
+  const navigate=useNavigate();
   return (
-    <footer className="bg-[#085526]  py-4 font-roboto">
-      <div className="container  w-[100vw] mx-auto flex flex-col md:flex-row justify-center items-center space-x-60 mb-20">
-        {/* Social Media Links */}
-        <div className='space-x-20 flex justify-center'>
+    <footer className="bg-[#085526] w-full font-roboto">
+      <div className="w-[90vw] mx-auto flex flex-col sm:flex-row justify-center  items-center space-x-60 mb-20">
+
+        <div className=' flex justify-center'>
           <div className='space-y-4 mt-20'>
             <ul className="flex flex-col space-y-4 text-white">
-              <li className="font-bold text-white text-[24px]">Contact Us</li>
-              <li className="text-[16px]">Call: +213 (0)21 989 323</li>
-              <li className="text-[16px]"> 
+              <li className="font-bold mx-auto text-white text-[24px]">Contact Us</li>
+              <li className="sm:text-[16px] text-[12px]  mx-auto">Call: +213 (0)21 989 323</li>
+              <li className="text-[16px]  mx-auto"> 
   <a href="mailto:contact@badr.dz">
-    <span className="font-semibold text-white flex items-center space-x-4">
+    <span className="font-semibold text-white sm:text-[16px] text-[12px] flex items-center space-x-4">
       <img src={email} alt="email" className='h-[20px]' />
       <p>Email: contact@badr.dz</p>
     </span>
   </a>
 </li>
 
-                <li className="text-[16px]"> 
+                <li className="sm:text-[16px] text-[12px]  mx-auto"> 
                 <button>
-                <span className="font-semibold text-white  flex items-center space-x-4">
+                <span className="font-semibold  text-white  flex items-center space-x-4">
                             <img src={adresse} alt="adresse" className='h-[35px]' />
                             <p>Adresse: Siège social 17, Bd Colonel <br /> Amirouche, B.P 484, Alger.</p>
                           </span>
                   </button>
                 </li>
             </ul>
-
-            <div className="flex space-x-4 text-[#343A40]">
+<div className='block mx-auto w-fit'>
+<div className="flex  space-x-4 text-[#343A40]">
               <button className="w-[40px] h-[40px] rounded-full bg-white flex items-center justify-center">
                 <a href="https://web.facebook.com/pageofficielledelabadr/?_rdc=1&_rdr">
                   <img src={fb} className='w-[18px] h-[18px]' alt="facebook" />
@@ -61,33 +62,38 @@ export const Footer = () => {
               </button>
 
             </div>
+</div>
+          
+
+
+
           </div>
 
-  <div className="flex items-center">
-            {/* Navigation Links */}
-   <div >
-  <p className="font-bold text-white text-[24px]">
-    Conditions&nbsp;bancaires
-  </p>
-  <a
-    href="/documents/Condition-de-banque-finance-islamique-1.pdf"
-    download
-    className="hover:text-[#ffc107] text-white text-sm"
-  >
-    Télécharger
-  </a>
-</div>          
-          </div>
-        </div>
-        <div className="mb-4 md:mb-0 mt-10 ">
-        <img
-                src={logo}
-                className='w-[320px] cursor-pointer h-[77px] rounded-full ml-auto '
-              />
-          
-        </div>
+
+        </div>  
+
+        <div className=' block w-fit mx-auto'>
+
+
+<p className="font-bold text-white text-[24px]">
+ Conditions&nbsp;bancaires
+</p>
+<a
+ href="/documents/Condition-de-banque-finance-islamique-1.pdf"
+ download
+ className="hover:text-[#ffc107] text-white text-sm"
+>
+ Télécharger
+</a>
+</div>  
+
       </div>
 
+   
+      <img src={logo} onClick={()=>
+      {navigate('/')}}
+                className='md:w-[20%] w-[50%] my-10 mx-auto cursor-pointer h-[77px] rounded-full ml-auto '
+              />
       {/* Links to Pages */}
       <div>
         <ul className="flex justify-center items-center text-white">
@@ -103,8 +109,7 @@ export const Footer = () => {
         </ul>
       </div>
 
-      {/* Copyright */}
-      <div className="mt-8 text-center text-white">
+      <div className="mt-8 mb-10 text-center text-white">
         <p>&copy;2024 Copyrights BADR BANK
         </p>
       </div>

@@ -17,7 +17,6 @@ export const Accueil = () => {
         < div className='w-[100vw]'>
            
 
-            {/* Section avec l'image comme fond */}
             <div className="relative mt-[55px] h-[80vh] w-[100vw]">
                 <img src={expert} alt="Expert en finance" className="absolute left-0 right-0 w-full h-full object-cover" />
                 
@@ -38,7 +37,6 @@ export const Accueil = () => {
           />
             </div>
 
-            {/* Contenu principal */}
             <div className="font-roboto h-fit" style={{
                 backgroundImage: `url(${badr})`, 
                 backgroundSize: 'cover',
@@ -51,7 +49,7 @@ export const Accueil = () => {
 
         
                 {/* Flex container to align text and image horizontally */}
-                <div className="sm:flex items-center justify-center space-x-8 mt-4 mr-10 ml-10">
+                <div className="sm:flex items-center justify-center sm:space-y-0 space-y-4 sm:space-x-8 mt-4 mr-10 ml-10">
                     {/* Titles and Paragraph */}
                     <div className="sm:w-1/2 bg-white rounded-lg p-8">
                         <h2 className="font-bold text-[36px] mb-2">Banque islamique</h2>
@@ -65,14 +63,13 @@ export const Accueil = () => {
                             }
                         </p>
                         <button 
-                            className="text-white bg-[#085526] py-2 px-5 mt-2 rounded" 
+                            className="text-white bg-[rgb(8,85,38)] py-2 px-5 mt-2 rounded" 
                             onClick={toggleText}
                         >
                             {isExpanded ? "Lire moins" : "Lire plus"}
                         </button>
                     </div>
-                    {/* Image */}
-                    <img src={finance} alt="Finance islamique" className="block mx-auto sm:w-1/2  rounded-lg mr-10" />
+                    <img src={finance} alt="Finance islamique" className="block   shadow-lg mx-auto sm:w-1/2 w-full rounded-lg " />
                 </div>
             </div>
         </div>

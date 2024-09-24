@@ -3,32 +3,10 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 import { SliderComponent } from "./slider";
 import badr from "/bg_badr.svg"
 export const Form = () => {
-// const handleSubmit = () => {
-//   if(formik.values)
-//   {
-//     console.log('ttnnnnnnnt')
-  
-//   }
-// }
-function getCookie(name) {
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i].trim();
-          // Check if this cookie string begins with the name we want
-          if (cookie.substring(0, name.length + 1) === (name + '=')) {
-              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-              break;
-          }
-      }
-  }
-  return cookieValue;
-}
+
 
 const navigate = useNavigate();
 
@@ -51,13 +29,18 @@ const navigate = useNavigate();
           const token = response.data.token;
           // Store the JWT securely, e.g., in memory (avoid localStorage for sensitive data)
           localStorage.setItem('otpToken', token);
-          navigate('/otp')
+          if(localStorage.getItem('otpToken'))
+          {
+            console.log(true)
+            navigate('/otp');
+          }
         })
         .catch(error => {
           console.error(error);
         });
     },
   });
+
 
   const [YesCodebiteur, setYesCodebiteur] = useState(false);
   const [YesBadr, setYesBadr] = useState(false);
@@ -68,7 +51,7 @@ const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedCreditType, setSelectedCreditType] = useState("");
 
-  const creditTypes = ["Crédit Immobilier", "Crédit Automobile", "Crédit Personnel"];
+  const creditTypes = ["Produit 1: véhicules particuliers de tourisme", "Produit 2: cycles et tricycles à moteur", "Produit 3: informatique , téléphonie , electroménager , téléviseurs , meubles , accessoires en bois , tissues d'ameublement"];
 
 
 
@@ -134,14 +117,10 @@ const navigate = useNavigate();
         Simulateur du financement islamique
       </h1>
 
-      <form
-onSubmit={formik.handleSubmit}        className="flex w-[90vw] items-center mx-auto flex-col space-y-4 mb-10 font-roboto"
-      >
+      <form onSubmit={formik.handleSubmit} className="flex w-[90vw] items-center mx-auto flex-col space-y-4 mb-10 font-roboto">
         <div className="flex flex-col space-y-1">
           <div className="flex flex-col space-y-1">
-            <label className="text-[#202121]/80 text-[14px]" htmlFor="Nom">
-              Nom :
-            </label>
+            <label className="text-[#202121]/80 text-[14px]" htmlFor="Nom">Nom :</label>
             <input
               className="border border-[#085526]/50 text-[#202121]/80 xxs:w-[300px] w-[200px] lg:w-[400px] placeholder-[#085526]/50 placeholder:text-[12px] text-[16px] rounded-[2px] focus:outline-none p-3"
               id="Nom"
@@ -152,16 +131,12 @@ onSubmit={formik.handleSubmit}        className="flex w-[90vw] items-center mx-a
               placeholder="Veuillez introduire votre nom"
             />
             {formik.errors.Nom && formik.touched.Nom && (
-              <div className="text-red-500 text-[12px]">
-                {formik.errors.Nom}
-              </div>
+              <div className="text-red-500 text-[12px]">{formik.errors.Nom}</div>
             )}
           </div>
 
           <div className="flex flex-col space-y-1">
-            <label className="text-[#202121]/80 text-[14px]" htmlFor="Prénom">
-              Prénom :
-            </label>
+            <label className="text-[#202121]/80 text-[14px]" htmlFor="Prénom">Prénom :</label>
             <input
               className="border border-[#085526]/50 placeholder-[#085526]/50 text-[#202121]/80 xxs:w-[300px] w-[200px] lg:w-[400px] placeholder:text-[12px] text-[16px] rounded-[2px] focus:outline-none p-3"
               id="Prenom"
@@ -172,9 +147,7 @@ onSubmit={formik.handleSubmit}        className="flex w-[90vw] items-center mx-a
               placeholder="Veuillez introduire votre prénom"
             />
             {formik.errors.Prenom && formik.touched.Prenom && (
-              <div className="text-red-500 text-[12px]">
-                {formik.errors.Prenom}
-              </div>
+              <div className="text-red-500 text-[12px]">{formik.errors.Prenom}</div>
             )}
           </div>
 
@@ -436,7 +409,7 @@ onSubmit={formik.handleSubmit}        className="flex w-[90vw] items-center mx-a
 </button>
 
           {showDropdown && (
-            <div className="border border-[#085526]/50 bg-white shadow-lg rounded-[2px] mt-2 w-full">
+            <div className="border border-[#085526]/50 bg-white shadow-lg rounded-[2px] mt-2 w-[200px] lg:w-[400px]">
               {creditTypes.map((type, index) => (
                 <div
                   key={index}
@@ -445,7 +418,7 @@ onSubmit={formik.handleSubmit}        className="flex w-[90vw] items-center mx-a
                 >
                   {type}
                 </div>
-              ))}
+                              ))}
             </div>
           )}
 
@@ -486,16 +459,14 @@ onSubmit={formik.handleSubmit}        className="flex w-[90vw] items-center mx-a
             <div className="text-red-500 text-[12px]">{formik.errors.jiddia}</div>
           )}
         </div>):''}</div>     
-       
 
-
-     <div className="sm:space-x-8 justify-center flex  flex-col items-center  ">
-        <button type="submit" className="bg-[#085526] text-white  px-[60px] py-[8px] shadow-md mb-10" >
+     <div className="sm:space-x-8  flex  flex-col sm:flex-row  items-center sm:space-y-0 space-y-5 ">
+        <button type="submit" className="bg-[#085526] text-white  px-[60px] py-[8px] shadow-md" >
           Calculer
         </button>
         <button type="button" onClick={()=>
           {
-            console.log('ttnnnnnnnt')
+            navigate('/')
           }
         }  className="bg-white text-black px-[60px] py-[8px] shadow-md">
           Annuler
