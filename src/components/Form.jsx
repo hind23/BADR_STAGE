@@ -14,6 +14,22 @@ export const Form = () => {
   
 //   }
 // }
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Check if this cookie string begins with the name we want
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+
 const navigate = useNavigate();
 
   const formik = useFormik({
@@ -30,29 +46,21 @@ const navigate = useNavigate();
     },
     validationSchema: basicschema,
     onSubmit: (values) => {
-      axios.post('http://127.0.0.1:8000/generate-otp/', {
-        email: values.email 
-      })
-    .then((response) => {
-      console.log(response.data); 
-    })
-    .catch((error) => {
-      
-      console.error(error); 
-    });
-
-      navigate('/otp')
-
-      console.log('Form values:');
-      console.log('Form values:', values);
+      axios.post('http://127.0.0.1:8000/generate-otp/', { email: values.email })
+        .then(response => {
+          const token = response.data.token;
+          // Store the JWT securely, e.g., in memory (avoid localStorage for sensitive data)
+          localStorage.setItem('otpToken', token);
+          navigate('/otp')
+        })
+        .catch(error => {
+          console.error(error);
+        });
     },
   });
 
   const [YesCodebiteur, setYesCodebiteur] = useState(false);
-
   const [YesBadr, setYesBadr] = useState(false);
-
-
   const [isMensuel, setisMensuel] = useState(true);
   const [isTrimestriel, setisTrimestriel] = useState(false);
   const [isAnnuel, setisAnnuel] = useState(false);
@@ -481,7 +489,7 @@ onSubmit={formik.handleSubmit}        className="flex w-[90vw] items-center mx-a
        
 
 
-     <div className="sm:space-x-8 flex-col items-center ">
+     <div className="sm:space-x-8 justify-center flex  flex-col items-center  ">
         <button type="submit" className="bg-[#085526] text-white  px-[60px] py-[8px] shadow-md mb-10" >
           Calculer
         </button>

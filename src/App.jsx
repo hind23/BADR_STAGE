@@ -12,7 +12,7 @@ function App() {
   return (
     <>
    <Router>
-          <div className="bg-[#f8f9fa] min-h-screen flex flex-col   ">
+          <div className="bg-[#f8f9fa] min-h-screen flex flex-col  w-[100vw] ">
             <Navbar/>          
         <Routes> 
         <Route path="/qui" element={<QuiSommesNous/>}/>

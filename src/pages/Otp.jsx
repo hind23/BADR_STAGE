@@ -3,39 +3,49 @@ import axios from 'axios';
 
 export const Otp=()=>
 {
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Check if this cookie string begins with the name we want
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
     const [val,setVal]=useState("");
     const handleChange=(e)=>
     { 
        setVal(e.target.value);
     }
     const handleSubmit = () => {
-        axios.post('http://127.0.0.1:8000/verify-otp/', {
-          otp: val, // Replace with actual OTP value
-        }, {
+      const token = localStorage.getItem('otpToken');  // Retrieve the stored JWT
+      axios.post('http://127.0.0.1:8000/verify-otp/', 
+        {
+          otp: val,  
+          token: token  // Include JWT in request body
+        },
+        {
           headers: {
             'Content-Type': 'application/json',
-          }
-        })
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.error(error.response ? error.response.data : error.message);
-        });
-      };
-      
-    // useEffect(() => {
-    //     axios.post('http://127.0.0.1:8000/generate-otp/', {
-    //         email: 'lh_dehili@esi.dz' 
-    //       })
-    //     .then((response) => {
-    //       console.log(response.data); 
-    //     })
-    //     .catch((error) => {
-          
-    //       console.error(error); 
-    //     });
-    //   }, []); 
+          },
+          withCredentials: true  // Ensure cookies/credentials are sent
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error.response ? error.response.data : error.message);
+      });
+    };
+    
     return(
         <div className="min-h-[50vh] flex flex-col items-center space-y-4 justify-center">
             <h1 className="text-2xl">

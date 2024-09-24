@@ -39,7 +39,7 @@ export const Navbar = () => {
     `hover:text-[#FFC107] ${activeLink === linkName ? 'text-[#FFC107]' : 'text-white'}`;
 
   return (
-    <div className="fixed  bg-[#085526]  top-0  w-full font-roboto ">
+    <div className="fixed  bg-[#085526]  top-0  w-full font-roboto z-50">
       <div className='w-full flex items-center h-16 mx-auto bg-[#085526] z-50 
        border border-x-0  border-b-1'>
         <div className="sticky bg-[#085526] h-[50px] flex items-center justify-between w-[90%] mx-auto">
@@ -131,10 +131,7 @@ export const Navbar = () => {
               Simulateur
             </Link>
           </li>
-          <li className='w-8 mx-auto'>
-            <button className='mx-auto text-center' onClick={() => goToProfile()}>
-            </button>
-          </li>
+       
         </ul>
       )}
 

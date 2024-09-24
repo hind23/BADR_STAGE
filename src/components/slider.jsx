@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 
 // Composant Slider avec couleur de fond dynamique
@@ -32,7 +33,7 @@ export const SliderComponent = ({
           max={max}        // Valeur maximale
           value={value}    // Valeur actuelle du slider
           onChange={handleSliderChange}  // Gère le changement
-          className="slider w-[300px] h-[8px] rounded-lg appearance-none cursor-pointer"
+          className="slider w-[150px] sm:w-[300px] h-[8px] rounded-lg appearance-none cursor-pointer"
           style={{
             background: `linear-gradient(to right, #007bff ${getBackgroundSize()}%, #d3d3d3 ${getBackgroundSize()}%)`, // Dégradé
             accentColor: '#007bff', // Couleur du curseur
