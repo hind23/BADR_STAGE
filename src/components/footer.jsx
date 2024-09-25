@@ -15,32 +15,55 @@ import { Link,useNavigate } from 'react-router-dom';
 export const Footer = () => {
   const navigate=useNavigate();
   return (
-    <footer className="bg-[#085526] w-full font-roboto">
-      <div className="w-[90vw] mx-auto flex flex-col sm:flex-row justify-center  items-center space-x-60 mb-20">
+    <footer className="bg-[#085526] w-[100vw] font-roboto">
+      <div className="w-[90vw] mx-auto flex flex-col sm:flex-row justify-center  items-center sm:space-x-60 mb-20">
 
-        <div className=' flex justify-center'>
-          <div className='space-y-4 mt-20'>
-            <ul className="flex flex-col space-y-4 text-white">
-              <li className="font-bold mx-auto text-white text-[24px]">Contact Us</li>
-              <li className="sm:text-[16px] text-[12px]  mx-auto">Call: +213 (0)21 989 323</li>
-              <li className="text-[16px]  mx-auto"> 
+        <div className='w-full flex justify-start '>
+          <div className='space-y-4 w-full  mt-20'>
+            <ul className="flex   flex-col space-y-4 text-white">
+              <li className="font-bold mr-auto text-white text-[24px]">Contact Us</li>
+              <li className="sm:text-[16px] text-[14px]  mr-auto">Call: +213 (0)21 989 323</li>
+              <li className="text-[16px]  mr-auto"> 
   <a href="mailto:contact@badr.dz">
-    <span className="font-semibold text-white sm:text-[16px] text-[12px] flex items-center space-x-4">
+    <div className="font-semibold text-white sm:text-[16px] text-[14px] flex items-center space-x-4">
       <img src={email} alt="email" className='h-[20px]' />
       <p>Email: contact@badr.dz</p>
-    </span>
+    </div>
   </a>
 </li>
 
-                <li className="sm:text-[16px] text-[12px]  mx-auto"> 
-                <button>
-                <span className="font-semibold  text-white  flex items-center space-x-4">
+</ul>       
+               
+                <div className="font-semibold  text-white sm:w-[200px] flex items-center space-x-4">
                             <img src={adresse} alt="adresse" className='h-[35px]' />
                             <p>Adresse: Siège social 17, Bd Colonel <br /> Amirouche, B.P 484, Alger.</p>
-                          </span>
-                  </button>
-                </li>
-            </ul>
+                          </div>
+            
+
+          
+
+
+
+          </div>
+
+
+        </div>  
+
+        <div className='flex space-y-8 flex-col items-start sm:mt-0 mt-10  mx-auto'>
+
+<div>
+ <p className="font-bold  text-white text-[20px]">
+ Conditions&nbsp;bancaires
+</p>
+<a
+ href="/documents/Condition-de-banque-finance-islamique-1.pdf"
+ download
+ className="hover:text-[#ffc107] text-white text-sm"
+>
+ Télécharger
+</a> 
+</div>
+
 <div className='block mx-auto w-fit'>
 <div className="flex  space-x-4 text-[#343A40]">
               <button className="w-[40px] h-[40px] rounded-full bg-white flex items-center justify-center">
@@ -63,37 +86,17 @@ export const Footer = () => {
 
             </div>
 </div>
-          
-
-
-
-          </div>
-
-
-        </div>  
-
-        <div className=' block w-fit mx-auto'>
-
-
-<p className="font-bold text-white text-[24px]">
- Conditions&nbsp;bancaires
-</p>
-<a
- href="/documents/Condition-de-banque-finance-islamique-1.pdf"
- download
- className="hover:text-[#ffc107] text-white text-sm"
->
- Télécharger
-</a>
 </div>  
 
       </div>
 
    
-      <img src={logo} onClick={()=>
-      {navigate('/')}}
-                className='md:w-[20%] w-[50%] my-10 mx-auto cursor-pointer h-[77px] rounded-full ml-auto '
-              />
+      <img 
+  src={logo} 
+  onClick={() => navigate('/')} 
+  className=' sm:w-[40%] w-[50%] my-10 mx-auto cursor-pointer h-[77px] rounded-full ml-auto object-contain' 
+/>
+
       {/* Links to Pages */}
       <div>
         <ul className="flex justify-center items-center text-white">
