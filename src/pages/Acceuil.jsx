@@ -3,12 +3,10 @@ import finance from "/Tout-savoir-sur-la-finance-islamique.jpg";
 import badr from "/bg_badr.svg";
 import expert from "/Finance_Expert.jpg";
 import logo from "/logo_removebg.png"
+import Popup from '../components/popUp';
 
 export const Accueil = () => {
-    // État pour gérer l'affichage complet du texte
     const [isExpanded, setIsExpanded] = useState(false);
-
-    // Fonction pour basculer l'état d'affichage
     const toggleText = () => {
         setIsExpanded(!isExpanded);
     };

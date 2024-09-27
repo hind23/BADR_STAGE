@@ -58,7 +58,7 @@ export const Otp=()=>
                         {
                             handleChange(e)
                         }
-                    } value={val} className=" md:w-[60%]  w-[80%] border-[2px] border-[#085526]/50 placeholder:text-[#085526]/50 text-[#085526] text-[15px] sm:text-[20px] outline-none p-3  placeholder:text-[16px] "  type="text" placeholder="Entrer le code OTP"/>
+                    } value={val} className=" md:w-[60%]  w-[80%] border-[2px] border-[#085526]/50 placeholder:text-[#085526]/50 text-[rgb(8,85,38)] text-[15px] sm:text-[20px] outline-none p-3  placeholder:text-[16px] "  type="text" placeholder="Entrer le code OTP"/>
                     <button className="bg-[#085526] md:w-[130px]  text-white p-3" onClick={handleSubmit} > 
                         Confirmer
                     </button>

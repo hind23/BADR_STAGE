@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { SliderComponent } from "./slider";
 import badr from "/bg_badr.svg"
+import Popup from "./popUp";
+import Wait from "./wait";
+
 export const Form = () => {
 
 
@@ -24,6 +27,7 @@ const navigate = useNavigate();
     },
     validationSchema: basicschema,
     onSubmit: (values) => {
+      setVisible(true);
       axios.post('http://127.0.0.1:8000/generate-otp/', { email: values.email })
         .then(response => {
           const token = response.data.token;
@@ -94,8 +98,12 @@ const navigate = useNavigate();
       setisAnnuel(true);
     }
   };
+  const [visible,setVisible]=useState(true)
 
-
+const handeClose=()=>
+{
+  setVisible(visible?false:true)
+}
   const [YesJiddia, setYesJiddia] = useState(false);
   const handleCheckboxChange = (e) => {
     setYesJiddia(e.target.checked);
@@ -116,7 +124,7 @@ const navigate = useNavigate();
       <h1 className="text-center underline text-[25px] text-[#085526] font-bold mb-5 mt-20">
         Simulateur du financement islamique
       </h1>
-
+ { visible &&  <Popup visible={visible} onClose={handeClose}/>}
       <form onSubmit={formik.handleSubmit} className="flex w-[90vw] items-center mx-auto flex-col space-y-4 mb-10 font-roboto">
         <div className="flex flex-col space-y-1">
           <div className="flex flex-col space-y-1">

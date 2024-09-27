@@ -8,7 +8,7 @@ export const Simulateur = () => {
   });
 
   const handleFormSubmit = (values) => {
-    // Capture form data when the form is submitted
+    // CapBture form data when the form is submitted
     setFormData({
       nom: values.Nom,
       prenom: values.Prenom,
