@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import close from "/close-square.svg";
 import { useNavigate } from "react-router-dom";
@@ -6,12 +8,26 @@ import Wait from "./wait";
 import jsPDF from "jspdf";
 import { useRef } from "react";
 import html2canvas from "html2canvas";
-function Popup({ visible, onClose }) {
+import axios from "axios";
+
+function Popup({ visible, onClose ,values}) {
+
+  const navigate=useNavigate();
   const pdfRef=useRef();
-  const saveToDB=()=>
-  {
+  const saveToDB = () => {
+    axios.post('http://127.0.0.1:8000/generate-otp/', { email: values.email })
+      .then(response => {
+        console.log(response);
+        localStorage.setItem('Token', response.data.token);
+        console.log('OTP Access Granted:', sessionStorage.getItem('otpAccessGranted')); // Check sessionStorage value
+        navigate('/otp');
+      })
+      .catch(error => {
+        console.error(error);
+      });
     setVisibleWait(true);
-  }
+  };
+  
   const [visibleWait,setVisibleWait]=useState(false);
   const [isVisible, setIsVisible] = useState(visible);
   const [isAnimating, setIsAnimating] = useState(false);

@@ -1,15 +1,15 @@
+/* eslint-disable no-unused-vars */
 import { basicschema } from "../schemas/index";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { SliderComponent } from "./slider";
 import badr from "/bg_badr.svg"
 import Popup from "./popUp";
-import Wait from "./wait";
-
+import {formContext} from "../App"
+import { useContext } from "react";
 export const Form = () => {
-
+const {form, setForm}=useContext(formContext)
 
 const navigate = useNavigate();
 
@@ -27,21 +27,9 @@ const navigate = useNavigate();
     },
     validationSchema: basicschema,
     onSubmit: (values) => {
+      setForm(values);
       setVisible(true);
-      axios.post('http://127.0.0.1:8000/generate-otp/', { email: values.email })
-        .then(response => {
-          const token = response.data.token;
-          // Store the JWT securely, e.g., in memory (avoid localStorage for sensitive data)
-          localStorage.setItem('otpToken', token);
-          if(localStorage.getItem('otpToken'))
-          {
-            console.log(true)
-            navigate('/otp');
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      console.log(values);
     },
   });
 
@@ -98,7 +86,7 @@ const navigate = useNavigate();
       setisAnnuel(true);
     }
   };
-  const [visible,setVisible]=useState(true)
+  const [visible,setVisible]=useState(false)
 
 const handeClose=()=>
 {
@@ -110,21 +98,19 @@ const handeClose=()=>
   };
 
   return (
-    <div className=" font-roboto h-fit" style={{
-      backgroundImage: `url(${badr})`, 
+    <div className="font-roboto h-fit"  style={{
+      backgroundImage: `url(${badr})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
-      
-     
     }} >
       
       <h1 className="text-center underline text-[25px] text-[#085526] font-bold mb-5 mt-20">
         Simulateur du financement islamique
       </h1>
- { visible &&  <Popup visible={visible} onClose={handeClose}/>}
+ { visible &&  <Popup visible={visible} onClose={handeClose} values={formik.values}/>}
       <form onSubmit={formik.handleSubmit} className="flex w-[90vw] items-center mx-auto flex-col space-y-4 mb-10 font-roboto">
         <div className="flex flex-col space-y-1">
           <div className="flex flex-col space-y-1">
