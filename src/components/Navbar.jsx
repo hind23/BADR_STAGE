@@ -4,7 +4,7 @@ import { SearchBar } from './SearchBar';
 import { useEffect, useState } from 'react';
 import menu from '/menu.svg';
 import close from '/close.svg';
-import logo from '/logo.png'
+import logo from '/logo2.png'
 export const Navbar = () => {
   const [visible, setVisible] = useState(false);
   const [activeLink, setActiveLink] = useState('Accueil'); // Default active link
@@ -39,17 +39,20 @@ export const Navbar = () => {
     `hover:text-[#FFC107] ${activeLink === linkName ? 'text-[#FFC107]' : 'text-white'}`;
 
   return (
-    <div className="fixed bg-[#085526]  top-0  w-full font-roboto z-50">
+    <div className="fixed bg-teal-700  top-0  w-full font-roboto z-50">
       <div className='w-full flex items-center h-16 mx-auto bg-[#085526] z-50 
        border border-x-0  border-b-1'>
         <div className="sticky bg-[#085526] h-[50px] flex items-center justify-between w-[90%] mx-auto">
-          <h3 className="text-[20px] font-pt-serif">
-          <img
+          <img onClick={()=>
+            {
+              navigate('/')
+            }
+          }
                 src={logo}
-                className='w-[120px] cursor-pointer h-[37px] rounded-full ml-auto '
+                className='w-[200px] cursor-pointer  h-[50px]ml-auto '
               />
-          </h3>
-          <SearchBar />
+          
+          {/* <SearchBar /> */}
           {!visible && (
             <img
               className='sm:hidden h-8 cursor-pointer block'
@@ -93,6 +96,14 @@ export const Navbar = () => {
                 >
                   Simulateur
                 </Link>
+              </li> <li>
+                <Link
+                  to="/login"
+                  onClick={() => setActiveLink('login')}
+                  className={linkClasses('login')}
+                >
+                  Connexion
+                </Link>
               </li>
             </ul>
          
@@ -131,6 +142,16 @@ export const Navbar = () => {
               className={linkClasses('Simulateur')}
             >
               Simulateur
+            </Link>
+          </li>  <li className='text-center'>
+            <Link
+              to="/login"
+              onClick={() => {setActiveLink('login'),
+                setVisible(false)
+              }}
+              className={linkClasses('login')}
+            >
+              Connexion
             </Link>
           </li>
        

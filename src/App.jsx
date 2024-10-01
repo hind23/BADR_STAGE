@@ -9,6 +9,7 @@ import { Footer } from "./components/footer";
 import { Simulateur } from "./pages/simulateur";
 import { Otp } from './pages/Otp';
 import { createContext,useState } from 'react';
+import { Login } from './pages/Login';
 export const formContext=createContext();
 function App() {
   const [form, setForm] = useState('');
@@ -29,14 +30,15 @@ function App() {
     <>
       <Router>
 
-        <div className="bg-[#f8f9fa] min-h-screen flex flex-col">
+        <div className="bg-white min-h-screen flex flex-col">
 
           <Navbar />
           <formContext.Provider value={{form,setForm}}>
 
           <Routes> 
-            <Route path="/qui" element={<QuiSommesNous />} />
-            <Route path="/" element={<Accueil />} />
+          <Route path="/qui" element={<QuiSommesNous />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Accueil />} />
             <Route path="/simulateur" element={<Simulateur />} />
             <Route
   path="/otp"
