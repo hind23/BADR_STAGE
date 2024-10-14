@@ -78,7 +78,14 @@ export function calculateFinancingAmount( duree , salaire) {
   const financement = (salaire*30/100)*duree;
   return financement;
 }
-
+//export function calculateFinancingAmount(financementmax,credit){
+ // let montant
+ //// if (credit>=financementmax){montant=financementmax
+//  //}else{
+    //montant=credit
+  //}
+ 
+//}
 export function calculateMonthlyTTC(margeTotale, financement, duree) {
   if (margeTotale === null || financement === null || duree <= 0) {
     console.error("Error: Invalid input values for TTC calculation");

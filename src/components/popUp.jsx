@@ -14,8 +14,13 @@ import {
 } from '../formules.js';
 
 const formatResult = (value) => {
+  if (typeof value !== "number") {
+    console.error("Le paramètre doit être un nombre.");
+    return null;
+  }
   return value.toFixed(2); // 2 représente le nombre de chiffres après la virgule
 };
+
 
 
 
@@ -194,11 +199,17 @@ function Popup({ visible, onClose, values, results, yes }) {
             <div ref={pdfRef} className="flex-col px-4 py-4 space-y-4">
               {yes ? (
                 <h2 className="md:text-[20px] sm:text-[17px] font-bold">
-                  <span className="text-teal-600">Mage de bonne fin (Hamish el jiddia):</span><span className="ml-2 text-teal-800">{formatResult(results.jiddia >= results.credit - results.montant ? results.jiddia : calculateJiddia(results.credit,results.montant)) } DA</span>
+                  <span className="text-teal-600">Mage de bonne fin (Hamish el jiddia):</span> <span className="ml-2 text-teal-800">
+    {results.jiddia >= results.credit - results.montant || yes 
+      ? results.jiddia 
+      : yes === false
+        ? "0 DA" // Vous pouvez afficher 0 ou un message personnalisé si c'est 0
+        : calculateJiddia(results.credit, results.montant) + " DA"}
+  </span>
                 </h2>
               ) : ''}
               <h2 className="md:text-[20px] sm:text-[17px] font-bold text-teal-600">
-                <span className="text-teal-600">Montant du financement :</span> <span className="ml-2 text-teal-800">{results.montant}</span>
+                <span className="text-teal-600">Montant du financement :</span> <span className="ml-2 text-teal-800">{results.montant} DA</span>
               </h2>
               <h2 className="md:text-[20px] text-teal-600 sm:text-[17px] font-bold">
                 <span className="text-teal-600">Durée:</span>
@@ -206,12 +217,12 @@ function Popup({ visible, onClose, values, results, yes }) {
               </h2>
               <h2 className="md:text-[20px] sm:text-[17px] font-bold text-teal-600">
                 <span className="text-teal-600">Marge totale:</span>
-                <span className="ml-2 text-teal-800">{formatResult(results.marge ? results.marge : 'N/A')} DA</span>
+                <span className="ml-2 text-teal-800">{results.marge ? results.marge : 'N/A'} DA</span>
 
               </h2>
               <h2 className="md:text-[20px] sm:text-[17px] font-bold text-teal-600">
               <span className="text-teal-600">Montant échéance TTC: </span>
-              <span className="ml-2 text-teal-800">{formatResult(results.TTC ? results.TTC : 'N/A')} DA</span>
+              <span className="ml-2 text-teal-800">{results.TTC ? results.TTC : 'N/A'} DA</span>
 
               </h2>
             </div>

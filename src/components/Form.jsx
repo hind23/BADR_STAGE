@@ -41,7 +41,7 @@ const navigate = useNavigate();
       credit:"",
       duree:"",
       type:"",
-      jiddia:"",
+      jiddia:0,
       client:""
     },
     validationSchema: basicschema,
@@ -84,7 +84,6 @@ const navigate = useNavigate();
     formik.setFieldValue("type", type); 
     setShowDropdown(false); 
   };
-
 
   const handleRadioChange = (e) => {
     const value = e.target.value === "yes";
@@ -137,6 +136,7 @@ let res={
   const [YesJiddia, setYesJiddia] = useState(false);
   const handleCheckboxChange = (e) => {
     setYesJiddia(e.target.checked);
+   
   };
 
 
@@ -470,11 +470,9 @@ let res={
           type="checkbox"
           checked={YesJiddia}
           onChange={handleCheckboxChange}
-        />
-        
-      
+        /> 
     
-    </div>
+ </div>
     <div>{YesJiddia ? ( <div className="flex flex-col space-y-1">
           <label className="text-[#202121]/80 text-[14px]" htmlFor="jiddia">
             Hamish el Jiddia en DA:
@@ -491,7 +489,8 @@ let res={
           {formik.errors.jiddia && formik.touched.jiddia && (
             <div className="text-red-500 text-[12px]">{formik.errors.jiddia}</div>
           )}
-        </div>): ''}</div>     
+        </div>): ''}</div>
+             
 
      <div className="sm:space-x-8  flex  flex-col sm:flex-row  items-center sm:space-y-0 space-y-5 ">
         <button type="submit" className="bg-[#085526] text-white  px-[60px] py-[8px] shadow-md" >

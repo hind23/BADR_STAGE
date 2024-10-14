@@ -18,3 +18,7 @@ export const basicschema=yup.object().shape({
    client: yup.string().required("Ce champs est obligatoire !"),
 
 })
+export const adminSchema = yup.object().shape({
+   email: yup.string().email("S'il vous plaît entrez un email valide !").required("Ce champs est obligatoire !"),
+   motDePasse: yup.string().required("Ce champs est obligatoire !"),
+});
