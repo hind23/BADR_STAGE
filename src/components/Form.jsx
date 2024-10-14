@@ -7,10 +7,25 @@ import { SliderComponent } from "./slider";
 import badr from "/bg_badr.svg"
 import Popup from "./popUp";
 import {formContext} from "../App"
-import { useContext } from "react";
+import { useContext,useEffect } from "react";
+import { 
+  calculateProfit, 
+  calculateTotalMargin, 
+  calculateFinancingAmount, 
+  calculateMonthlyTTC, 
+} from '../formules.js';
+
+
+
 export const Form = () => {
 const {form, setForm}=useContext(formContext)
+const handleTypeChange = (value) => {
+  formik.setFieldValue('type', value); // Mettez à jour le type de credit dans Formik
+};
 
+const handleSliderChange = (value) => {
+  formik.setFieldValue('duree', value); // Mettez à jour la valeur de la durée dans Formik
+};
 const navigate = useNavigate();
 
   const formik = useFormik({
@@ -23,7 +38,11 @@ const navigate = useNavigate();
       salaire: "",
       SalaireCod:"",
       Agecod:"",
-      jiddia:""
+      credit:"",
+      duree:"",
+      type:"",
+      jiddia:"",
+      client:""
     },
     validationSchema: basicschema,
     onSubmit: (values) => {
@@ -32,16 +51,25 @@ const navigate = useNavigate();
       console.log(values);
     },
   });
-
+  
 
   const [YesCodebiteur, setYesCodebiteur] = useState(false);
-  const [YesBadr, setYesBadr] = useState(false);
+  const [isBadr, setisBadr] = useState(true);
+  const [isIndiv, setisIndiv] = useState(false);
+  const [isEntreprise, setisEntreprise] = useState(false);
+
   const [isMensuel, setisMensuel] = useState(true);
   const [isTrimestriel, setisTrimestriel] = useState(false);
   const [isAnnuel, setisAnnuel] = useState(false);
 
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedCreditType, setSelectedCreditType] = useState("");
+
+
+
+
+
+
 
   const creditTypes = ["Produit 1: véhicules particuliers de tourisme", "Produit 2: cycles et tricycles à moteur", "Produit 3: informatique , téléphonie , electroménager , téléviseurs , meubles , accessoires en bois , tissues d'ameublement"];
 
@@ -53,7 +81,7 @@ const navigate = useNavigate();
 
   const handleCreditTypeSelect = (type) => {
     setSelectedCreditType(type);
-    formik.setFieldValue("creditType", type); 
+    formik.setFieldValue("type", type); 
     setShowDropdown(false); 
   };
 
@@ -61,11 +89,6 @@ const navigate = useNavigate();
   const handleRadioChange = (e) => {
     const value = e.target.value === "yes";
     setYesCodebiteur(value);
-  };
-
-  const handleRadioChangeBadr = (e) => {
-    const value = e.target.value === "yes";
-    setYesBadr(value);
   };
 
   const handlePaymentFrequencyChange = (e) => {
@@ -86,16 +109,37 @@ const navigate = useNavigate();
       setisAnnuel(true);
     }
   };
+
+  const handleTypeClientChange = (e) => {
+    const { value } = e.target;
+    formik.setFieldValue("client", value);
+    setisBadr(value === "Personnel de la BADR");
+    setisIndiv(value === "Individu");
+    setisEntreprise(value === "Entreprise conventionnée");
+  };
   const [visible,setVisible]=useState(false)
 
 const handeClose=()=>
 {
   setVisible(visible?false:true)
 }
+let res={
+  jiddia:formik.values.jiddia,
+  credit:formik.values.credit,
+  montant:calculateFinancingAmount(formik.values.duree,formik.values.salaire),
+  duree:formik.values.duree,
+  age:formik.values.age,
+  type:formik.values.type,
+  salaire:formik.values.salaire,
+  marge:calculateTotalMargin(calculateProfit(formik.values.credit,formik.values.type,formik.values.client)),
+  TTC:calculateMonthlyTTC(calculateTotalMargin(calculateProfit(formik.values.credit,formik.values.type,formik.values.client)),calculateFinancingAmount(formik.values.credit,formik.values.jiddia),formik.values.duree)
+}
   const [YesJiddia, setYesJiddia] = useState(false);
   const handleCheckboxChange = (e) => {
     setYesJiddia(e.target.checked);
   };
+
+
 
   return (
     <div className="font-roboto h-fit"  style={{
@@ -110,12 +154,14 @@ const handeClose=()=>
       <h1 className="text-center underline text-[25px] text-[#085526] font-bold mb-5 mt-20">
         Simulateur du financement islamique
       </h1>
- { visible &&  <Popup visible={visible} onClose={handeClose} values={formik.values}/>}
+ { visible &&  <Popup visible={visible} onClose={handeClose}  values={formik.values} yes={YesJiddia} results={res}/>}
       <form onSubmit={formik.handleSubmit} className="flex w-[90vw] items-center mx-auto flex-col space-y-4 mb-10 font-roboto">
         <div className="flex flex-col space-y-1">
           <div className="flex flex-col space-y-1">
             <label className="text-[#202121]/80 text-[14px]" htmlFor="Nom">Nom :</label>
             <input
+
+
               className="border border-[#085526]/50 text-[#202121]/80 xxs:w-[300px] w-[200px] lg:w-[400px] placeholder-[#085526]/50 placeholder:text-[12px] text-[16px] rounded-[2px] focus:outline-none p-3"
               id="Nom"
               name="Nom"
@@ -218,36 +264,29 @@ const handeClose=()=>
           )}
         </div>
 
-        <div className="flex flex-col space-y-4 items-center ">
+        <div className="flex flex-col space-y-4 items-center">
           <label className="text-[#202121]/80 text-left text-[14px] font-bold">
-          Personnel de la BADR ?
+            Vous êtes :
           </label>
           <div className="flex items-center space-x-4">
-            <label className="flex items-center text-[#202121]/80 text-[14px]">
-              <input 
-                type="radio"
-                name="Badr"
-                value="yes"
-                checked={YesBadr === true}
-                onChange={handleRadioChangeBadr}
-                className="mr-2"
-              />
-              Oui
-            </label>
-
-            <label className="flex items-center text-[#202121]/80 text-[14px]">
-              <input
-                type="radio"
-                name="Badr"
-                value="no"
-                checked={YesBadr === false}
-                onChange={handleRadioChangeBadr}
-                className="mr-2"
-              />
-              Non
-            </label>
+            {["Personnel de la BADR", "Entreprise conventionnée", "Individu"].map(clientType => (
+              <label key={clientType} className="flex items-center text-[#202121]/80 text-[14px]">
+                <input 
+                  type="radio"
+                  name="client"
+                  value={clientType}
+                  checked={formik.values.client === clientType}
+                  onChange={handleTypeClientChange}
+                  className="mr-2"
+                />
+                {clientType}
+              </label>
+            ))}
           </div>
-          </div>
+          {formik.errors.client && formik.touched.client && (
+            <div className="text-red-500 text-[12px]">{formik.errors.client}</div>
+          )}
+        </div>
 
         <div className="flex flex-col space-y-4 items-center ">
           <label className="text-[#202121]/80 text-left text-[14px] font-semibold">
@@ -394,7 +433,7 @@ const handeClose=()=>
           <button
   type="button"
   className="border border-[#085526]/50 text-[#202121]/80 p-3 rounded-[2px] bg-white shadow-sm flex justify-between w-[200px] lg:w-[400px] items-center"
-  onClick={toggleDropdown}
+  onClick={toggleDropdown} onChange={handleTypeChange}
 >
   <span className={selectedCreditType ? "text-[#202121]/80" : "text-[#085526]/50 text-[14px] text-sm"}>
     {selectedCreditType ? selectedCreditType : "Sélectionner un type de crédit"}
@@ -417,13 +456,13 @@ const handeClose=()=>
           )}
 
           {/* Display validation error */}
-          {formik.errors.creditType && formik.touched.creditType && (
+          {formik.errors.type && formik.touched.type && (
             <div className="text-red-500 text-[12px]">
-              {formik.errors.creditType}
+              {formik.errors.type}
             </div>
           )}
         </div>
-        <SliderComponent label="Durée de paiement" min={0} max={60} unit="mois"/>
+        <SliderComponent label="Durée de paiement" min={0} max={100} unit="mois"   onChange={handleSliderChange} />
  
         <div className="mt-6 flex flex-row space-x-2 ">
       <label className="text-[#202121]/80 font-semibold text-[14px]">Marge de bon fin (Hamish el jiddia) :</label>
@@ -452,7 +491,7 @@ const handeClose=()=>
           {formik.errors.jiddia && formik.touched.jiddia && (
             <div className="text-red-500 text-[12px]">{formik.errors.jiddia}</div>
           )}
-        </div>):''}</div>     
+        </div>): ''}</div>     
 
      <div className="sm:space-x-8  flex  flex-col sm:flex-row  items-center sm:space-y-0 space-y-5 ">
         <button type="submit" className="bg-[#085526] text-white  px-[60px] py-[8px] shadow-md" >
@@ -466,8 +505,9 @@ const handeClose=()=>
           Annuler
         </button>
         </div>
-       
-      </form>
+      
+       </form>
+      
     </div>
   );
 };

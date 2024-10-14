@@ -3,16 +3,25 @@ import { useState } from "react";
 
 // Composant Slider avec couleur de fond dynamique
 export const SliderComponent = ({
-  label = "Durée",  // Le label du slider
-  min = 0,          // Valeur minimale
-  max = 60,         // Valeur maximale
-  unit = "mois",     // Unité
+  label ,  // Le label du slider
+  min,          // Valeur minimale
+  max ,         // Valeur maximale
+  unit ,     // Unité
+  onChange
 }) => {
   // État pour la valeur du slider
   const [value, setValue] = useState((min + max) / 2);
 
   const handleSliderChange = (e) => {
+
     setValue(e.target.value);  // Met à jour la valeur du slider
+  };
+
+
+  const handleChange = (e) => {
+    const newValue = e.target.value;
+    setValue(newValue);
+    onChange(newValue); // Passez la nouvelle valeur à `Formik`
   };
 
   // Calcul du pourcentage de la progression du slider
@@ -32,7 +41,7 @@ export const SliderComponent = ({
           min={min}        // Valeur minimale
           max={max}        // Valeur maximale
           value={value}    // Valeur actuelle du slider
-          onChange={handleSliderChange}  // Gère le changement
+          onChange={handleChange}  // Gère le changement
           className="slider w-[150px] sm:w-[300px] h-[8px] rounded-lg appearance-none cursor-pointer"
           style={{
             background: `linear-gradient(to right, #007bff ${getBackgroundSize()}%, #d3d3d3 ${getBackgroundSize()}%)`, // Dégradé
