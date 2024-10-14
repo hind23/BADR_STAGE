@@ -18,7 +18,7 @@ export const Otp=()=>
   const {form}=useContext(formContext);
 
 const [isResend,setResend]=useState(false);
-  const [timeLeft, setTimeLeft] = useState(1 ); 
+  const [timeLeft, setTimeLeft] = useState(10*60 ); 
   useEffect(() => {
     if (timeLeft === 0) {
       setResend(true);
