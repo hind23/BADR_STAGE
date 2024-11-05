@@ -3,7 +3,7 @@ import finance from "/Tout-savoir-sur-la-finance-islamique.jpg";
 import badr from "/bg_badr.svg";
 import expert from "/Finance_Expert.jpg";
 import logo from "/logo_removebg.png"
-import Popup from '../components/popUp';
+import picture1 from "/businessman-badr.jpg"
 
 export const Accueil = () => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -68,6 +68,27 @@ export const Accueil = () => {
                         </button>
                     </div>
                     <img src={finance} alt="Finance islamique" className="block   shadow-lg mx-auto sm:w-1/2 w-full rounded-lg " />
+                </div>
+
+ <div className="bg-white mt-10 p-8 rounded-lg mx-10 shadow-lg">
+                    <h3 className="font-bold text-2xl mb-4">Qu'est-ce que le Financement Islamique ?</h3>
+                    <p className="text-[#7A838B] mb-4">
+                        Le financement islamique repose sur des principes éthiques de la Sharia, interdisant l’intérêt (riba) et les transactions spéculatives (gharar). Il s'appuie sur des partenariats justes et transparents, où le risque et la récompense sont partagés entre les parties. Les produits financiers sont basés sur des actifs réels, favorisant ainsi une économie réelle et réduisant les risques de bulles financières.
+                    </p>
+                    <p className="text-[#7A838B] mb-4">
+                        Les principaux modes de financement islamique incluent la Mourabaha (financement par l'achat et la revente de biens avec une marge bénéficiaire convenue), l'Ijara (location-vente ou leasing islamique), et la Moudharaba (partenariat d'investissement où le capital est fourni par une partie et la gestion par une autre). Ces services visent à promouvoir l'équité et l'intégrité dans les transactions financières.
+                    </p>
+                </div>
+
+                {/* Nouvelle section sur les missions et l'impact de la BADR */}
+                <div className="bg-white mt-10 p-8 rounded-lg mx-10 shadow-lg">
+                    <h3 className="font-bold text-2xl mb-4">L'Engagement de la BADR</h3>
+                    <p className="text-[#7A838B] mb-4">
+                        La Banque d'Agriculture et de Développement Rural (BADR) a pour mission de soutenir le secteur agricole en Algérie, en fournissant des crédits et en favorisant les investissements dans l'agriculture, l'agroalimentaire et l'artisanat. En tant que pionnière de la finance islamique en Algérie, la BADR offre des services financiers conformes à la Charia, répondant aux besoins de ses clients tout en respectant leurs valeurs éthiques.
+                    </p>
+                    <p className="text-[#7A838B] mb-4">
+                        Depuis 2017, la BADR s'efforce de diversifier ses services en proposant plus de 16 produits financiers islamiques, conçus pour être justes et transparents. Avec un réseau de 340 agences, la banque continue d’élargir son impact en répondant aux besoins des particuliers, des entreprises, et des jeunes épargnants à travers des produits comme les comptes d’épargne islamiques et le financement Mourabaha.
+                    </p>
                 </div>
             </div>
         </div>

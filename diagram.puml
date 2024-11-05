@@ -1,0 +1,84 @@
+@startuml Diag
+skinparam classAttributeIconSize 0
+
+class Client {
+  +String nom
+  +String prenom
+  +String adresse
+  +String telephone
+  +String email
+  +Credit soumettreDemandeCredit(Produit produit)
+  +void afficherInfosClient()
+}
+
+class Produit {
+  +String nom
+  +String categorie
+  +float prix
+  +void afficherInfosProduit()
+}
+
+class Credit {
+  +float montant
+  +Date dateDebut
+  +int duree
+  +String etat
+  +float calculerEcheances()
+  +void setApproved(boolean approved)
+  +void setReasonRejection(String reason)
+}
+
+class Admin {
+  +String nomUtilisateur
+  +String motDePasse
+  +List<Credit> visualiserCredits()
+}
+
+class Form {
+  +String clientType
+  +boolean hasCodebiteur
+  +float salaireCodebiteur
+  +int ageCodebiteur
+  +float creditAmount
+  +String paymentFrequency
+  +String creditType
+  +boolean hasJiddia
+  +int duree
+  +Produit produitChoisi
+  +void handleSubmit()
+}
+
+class Calculator {
+  +float calculateProfit(float creditAmount, String creditType, String clientType)
+  +float calculateTotalMargin(float profit)
+  +float calculateFinancingAmount(int duree, float salaireTotal)
+  +float calculateMonthlyTTC(float totalMargin, float financingAmount, int duree)
+  +float calculateMaxFinancingAmount(int duree, float salaireTotal)
+}
+
+class Popup {
+  +boolean visible
+  +void close()
+}
+
+class FormContext {
+  +Form form
+}
+
+class CreditController {
+  +boolean validateCreditRequest(Client client, Credit credit, Produit produit)
+  +void sendOtp(String email)
+  +boolean confirmOtp(String otp)
+  +String getRejectionReason()
+}
+
+Client "1" -- "1" Form : remplit
+Admin "1" -- "1" Client : approuve/refuse
+Form "1" -- "1" Calculator : utilise pour calcul
+Form "1" -- "1" Popup : affiche résultats dans
+Form "1" -- "1" FormContext : stocke dans
+Produit "1" -- "1" Credit : associé à
+Credit "1" -- "1" Client : demandé par
+Form "1" -- "1" CreditController : utilise pour validation
+Calculator "1" -- "1" CreditController : utilisé pour calcul
+@enduml

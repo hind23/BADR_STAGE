@@ -13,7 +13,9 @@ import {
   calculateTotalMargin, 
   calculateFinancingAmount, 
   calculateMonthlyTTC, 
+  calculateMaxFinancingAmount
 } from '../formules.js';
+import { number } from "yup";
 
 
 
@@ -24,6 +26,7 @@ const handleTypeChange = (value) => {
 };
 
 const handleSliderChange = (value) => {
+
   formik.setFieldValue('duree', value); // Mettez à jour la valeur de la durée dans Formik
 };
 const navigate = useNavigate();
@@ -36,10 +39,10 @@ const navigate = useNavigate();
       Prenom: "",
       num: "",
       salaire: "",
-      SalaireCod:"",
+      SalaireCod:0,
       Agecod:"",
       credit:"",
-      duree:"",
+      duree:"50",
       type:"",
       jiddia:0,
       client:""
@@ -84,12 +87,16 @@ const navigate = useNavigate();
     formik.setFieldValue("type", type); 
     setShowDropdown(false); 
   };
+  const handleCodSalaire = (e) => {
+    formik.setFieldValue("SalaireCod", e.target.value); 
+  };
 
   const handleRadioChange = (e) => {
     const value = e.target.value === "yes";
     setYesCodebiteur(value);
+  
   };
-
+ 
   const handlePaymentFrequencyChange = (e) => {
     const { value } = e.target;
 
@@ -123,15 +130,15 @@ const handeClose=()=>
   setVisible(visible?false:true)
 }
 let res={
-  jiddia:formik.values.jiddia,
-  credit:formik.values.credit,
-  montant:calculateFinancingAmount(formik.values.duree,formik.values.salaire),
-  duree:formik.values.duree,
-  age:formik.values.age,
+  jiddia:Number(formik.values.jiddia),
+  credit:Number(formik.values.credit),
+  montant:calculateFinancingAmount(formik.values.duree,Number(formik.values.salaire) +Number(formik.values.SalaireCod)),
+  duree:(formik.values.duree),
+  age:(formik.values.age),
   type:formik.values.type,
-  salaire:formik.values.salaire,
-  marge:calculateTotalMargin(calculateProfit(formik.values.credit,formik.values.type,formik.values.client)),
-  TTC:calculateMonthlyTTC(calculateTotalMargin(calculateProfit(formik.values.credit,formik.values.type,formik.values.client)),calculateFinancingAmount(formik.values.credit,formik.values.jiddia),formik.values.duree)
+  salaire: Number(formik.values.salaire) +Number(formik.values.SalaireCod),
+  marge:calculateTotalMargin(calculateProfit(Number(formik.values.credit),(formik.values.type),(formik.values.client))),
+  TTC:calculateMonthlyTTC(calculateTotalMargin(calculateProfit(Number(formik.values.credit),formik.values.type,formik.values.client))        ,          calculateFinancingAmount(calculateMaxFinancingAmount(Number(formik.values.duree) , Number(formik.values.salaire) +Number(formik.values.SalaireCod))  ,   Number(formik.values.credit),(formik.values.jiddia)),(formik.values.duree))
 }
   const [YesJiddia, setYesJiddia] = useState(false);
   const handleCheckboxChange = (e) => {

@@ -1,0 +1,29 @@
+@startuml UseCaseDiagram
+
+actor Client
+actor Admin
+
+rectangle "Credit System" {
+    component CreditController
+
+    usecase "Soumettre une demande de crédit" as U1
+    usecase "Valider les conditions de crédit" as U2
+    usecase "Calculer les marges et le profit" as U3
+    usecase "Générer et envoyer un OTP" as U4
+    usecase "Confirmer OTP" as U5
+    usecase "Créer un crédit" as U6
+    usecase "Afficher les crédits" as U7
+    usecase "Afficher message de rejet" as U8
+}
+
+Client -> U1
+U1 --> CreditController : utilise pour valider la demande
+CreditController --> U2 : vérifie les conditions
+U2 --> U3 : utilise pour calculs
+CreditController --> U4 : envoie OTP si crédit approuvé
+U4 --> U5 : confirmation OTP pour finaliser
+CreditController --> U6 : création du crédit
+U2 --> U8 : affiche raison de rejet si non éligible
+Admin -> U7 : voir crédits approuvés
+
+@enduml

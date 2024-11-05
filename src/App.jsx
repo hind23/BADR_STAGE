@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import { Routes, Route, BrowserRouter as Router, Navigate } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode'; // Correct import for jwt-decode
-import { QuiSommesNous } from "./pages/QuiSommesNous";
+import { Definitions } from './pages/Definitions';
 import { Accueil } from "./pages/Acceuil";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/footer";
@@ -36,7 +36,7 @@ function App() {
           <formContext.Provider value={{form,setForm}}>
 
           <Routes> 
-          <Route path="/qui" element={<QuiSommesNous />} />
+          <Route path="/definitions" element={<Definitions />} />
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Accueil />} />
             <Route path="/simulateur" element={<Simulateur />} />

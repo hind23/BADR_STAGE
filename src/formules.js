@@ -57,8 +57,7 @@ export function calculateProfit(credit, typecredit, client) {
     return null; // Invalid product or type
   }
 
-  const profit = Number(credit) * Number(taux);
-  console.log("Profit:", profit);
+  const profit = credit * taux;
   return profit;
 }
 
@@ -71,45 +70,64 @@ export function calculateTotalMargin(profit) {
   const margeTotale = profit + tva;
 
   console.log("Marge Totale (Profit + TVA):", margeTotale);
-  return margeTotale;
+  return Math.round(margeTotale);
 }
 
-export function calculateFinancingAmount( duree , salaire) {
+export function calculateMaxFinancingAmount( duree , salaire) {
   const financement = (salaire*30/100)*duree;
   return financement;
 }
-//export function calculateFinancingAmount(financementmax,credit){
- // let montant
- //// if (credit>=financementmax){montant=financementmax
-//  //}else{
-    //montant=credit
-  //}
- 
-//}
+
+export function calculateFinancingAmount(financementmax,credit,jiddia){
+  let montant ;
+  if (credit>=financementmax){montant=financementmax-jiddia
+}else{
+    montant=credit-jiddia
+  }
+ return Number(montant);
+}
+
 export function calculateMonthlyTTC(margeTotale, financement, duree) {
   if (margeTotale === null || financement === null || duree <= 0) {
     console.error("Error: Invalid input values for TTC calculation");
     return null;
   }
-
   const totalTTC = (margeTotale + financement) / duree;
 
-  console.log("Montant Mensuel TTC:", totalTTC);
-  return totalTTC;
+  return Math.round(totalTTC);
 }
 
-export function calculateJiddia(credit,montant){
- 
-  if (credit === null || montant === null) {
-    console.error("Error: Invalid input values for jiddia calculation");
-    return null;
+export function calculateJiddia(credit, montant, jiddia) {
+  // Vérification des paramètres
+  console.log("calculate jiddia ::::::::::::::::::::::",credit,montant,jiddia)
+  if (typeof credit !== "number" || isNaN(credit)) {
+    console.error("Erreur: Le paramètre 'credit' n'est pas un nombre valide.");
+    return "Erreur: 'credit' n'est pas un nombre.";
   }
-  const jiddia=credit-montant
 
-  console.log("Marge de bon fin:", jiddia);
-  return jiddia;
+  if (typeof Number(montant) !== "number" || isNaN(montant)) {
+    console.error("Erreur: Le paramètre 'montant' n'est pas un nombre valide.");
+    return "Erreur: 'montant' n'est pas un nombre.";
+  }
 
+  if (typeof jiddia !== "number" || isNaN(jiddia)) {
+    console.error("Erreur: Le paramètre 'jiddia' n'est pas un nombre valide.");
+    return "Erreur: 'jiddia' n'est pas un nombre.";
+  }
+  if(jiddia>=credit){
+    console.error("vous n'avaez pas besoin de faire le credit!")
+  }else{ // Calcul de la marge de bon fin
+    if (jiddia >= credit - montant) {
+      console.log("Marge de bon fin:", jiddia);
+      return jiddia;
+    } else {
+      const jiddiafin = credit - montant;
+      console.log("Marge de bon fin:", jiddiafin);
+      return jiddiafin;
+    }}
 }
+
+
 export function executeCalculation(credit, jidia, productName, type, duree) {
   const profit = calculateProfit(credit, productName, type);
   if (profit === null) {
@@ -133,15 +151,16 @@ export function executeCalculation(credit, jidia, productName, type, duree) {
 }
 
 // Example data
-const credit = 50000; // Example credit amount
-const jidia = 10000; // Example down payment
+const credit = 2000000; // Example credit amount
+const jiddia = 10000; // Example down payment
 const typecredit = "Produit 1: véhicules particuliers de tourisme"; // Correct product name
 const client = 'individuel'; // Client type
-const duree = 12; // Duration in months
-
-let profit=calculateProfit(credit,typecredit,client)
-let marge=calculateTotalMargin(profit)
- console.log("la marge esttt ",marge)
+const duree = 36; // Duration in months
+const salaire=60000;
+let montant=calculateFinancingAmount(calculateMaxFinancingAmount(duree,salaire,credit,jiddia),credit,jiddia)
+console.log("le montant de financement est :",montant)
+let jed=calculateJiddia(credit,montant,jiddia)
+console.log("hamish el jiddia est",jed)
 
 // Execute calculations for given inputs
 //let res=executeCalculation(credit, jidia, typecredit, client, duree);

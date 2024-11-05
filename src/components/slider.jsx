@@ -12,6 +12,7 @@ export const SliderComponent = ({
   // État pour la valeur du slider
   const [value, setValue] = useState((min + max) / 2);
 
+  console.log(value)
   const handleSliderChange = (e) => {
 
     setValue(e.target.value);  // Met à jour la valeur du slider

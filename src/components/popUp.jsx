@@ -11,6 +11,8 @@ import html2canvas from "html2canvas";
 import axios from "axios";
 import { 
   calculateJiddia, 
+  calculateFinancingAmount,
+  calculateMaxFinancingAmount
 } from '../formules.js';
 
 const formatResult = (value) => {
@@ -197,19 +199,20 @@ function Popup({ visible, onClose, values, results, yes }) {
               <img className="w-[30px]" src={close} alt="Close button" />
             </button>
             <div ref={pdfRef} className="flex-col px-4 py-4 space-y-4">
-              {yes ? (
+              
                 <h2 className="md:text-[20px] sm:text-[17px] font-bold">
                   <span className="text-teal-600">Mage de bonne fin (Hamish el jiddia):</span> <span className="ml-2 text-teal-800">
-    {results.jiddia >= results.credit - results.montant || yes 
-      ? results.jiddia 
-      : yes === false
-        ? "0 DA" // Vous pouvez afficher 0 ou un message personnalisé si c'est 0
-        : calculateJiddia(results.credit, results.montant) + " DA"}
+    {  yes 
+    ? calculateJiddia(results.credit, calculateFinancingAmount(calculateMaxFinancingAmount(results.duree, results.salaire),results.credit,results.jiddia),   results.jiddia) - results.jiddia
+    : calculateJiddia(results.credit, calculateFinancingAmount(calculateMaxFinancingAmount(results.duree, results.salaire),results.credit,results.jiddia ),    results.jiddia)}DA
   </span>
                 </h2>
-              ) : ''}
+            
               <h2 className="md:text-[20px] sm:text-[17px] font-bold text-teal-600">
-                <span className="text-teal-600">Montant du financement :</span> <span className="ml-2 text-teal-800">{results.montant} DA</span>
+                <span className="text-teal-600">Montant du financement :</span> <span className="ml-2 text-teal-800">{calculateFinancingAmount(calculateMaxFinancingAmount(results.duree,results.salaire),results.credit,results.jiddia)+results.jiddia}DA</span>
+
+
+                
               </h2>
               <h2 className="md:text-[20px] text-teal-600 sm:text-[17px] font-bold">
                 <span className="text-teal-600">Durée:</span>
@@ -217,13 +220,12 @@ function Popup({ visible, onClose, values, results, yes }) {
               </h2>
               <h2 className="md:text-[20px] sm:text-[17px] font-bold text-teal-600">
                 <span className="text-teal-600">Marge totale:</span>
-                <span className="ml-2 text-teal-800">{results.marge ? results.marge : 'N/A'} DA</span>
+                <span className="ml-2 text-teal-800">{results.marge ? results.marge : 'N/A'}DA</span>
 
               </h2>
               <h2 className="md:text-[20px] sm:text-[17px] font-bold text-teal-600">
               <span className="text-teal-600">Montant échéance TTC: </span>
-              <span className="ml-2 text-teal-800">{results.TTC ? results.TTC : 'N/A'} DA</span>
-
+              <span className="ml-2 text-teal-800">{results.TTC }DA</span>
               </h2>
             </div>
             <div className="space-x-4 flex flex-row">

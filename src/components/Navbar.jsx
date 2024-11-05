@@ -81,11 +81,11 @@ export const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to="/qui"
-                  onClick={() => setActiveLink('Qui somme nous ?')}
-                  className={linkClasses('Qui somme nous ?')}
+                  to="/definitions"
+                  onClick={() => setActiveLink('Definitions')}
+                  className={linkClasses('Definitions')}
                 >
-                  Qui somme nous ?
+                  Definitions
                 </Link>
               </li>
               <li>
@@ -126,10 +126,10 @@ export const Navbar = () => {
           <li className='text-center'>
             <Link
               to="/Qui"
-              onClick={() => {setActiveLink('Qui somme nous ?'), setVisible(false)}}
-              className={linkClasses('Qui somme nous ?')}
+              onClick={() => {setActiveLink('Definitions'), setVisible(false)}}
+              className={linkClasses('Definitions')}
             >
-              Qui somme nous ?
+              Definitions
 
             </Link>
           </li>

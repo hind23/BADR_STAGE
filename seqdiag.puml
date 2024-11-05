@@ -1,0 +1,29 @@
+@startuml SequenceDiagram
+actor Client
+participant Form
+participant Calculator
+participant Admin
+participant Credit
+participant EmailService
+participant OTPVerifier
+
+Client -> Form: soumettreDemandeCredit()
+Form -> Calculator: calculateProfit()
+Calculator -> Form: renvoie le profit
+Form -> Credit: verifierEligibilite(Client, Produit)
+Credit -> Admin: envoie la demande de crédit pour validation
+Admin -> Credit: vérifie les conditions de crédit
+alt Credit accepté
+    Credit -> Client: envoyerCodeOTP(email)
+    Client -> OTPVerifier: entre le code OTP
+    OTPVerifier -> Credit: verifierCodeOTP(code)
+    alt OTP valide
+        Credit -> Client: notification de crédit approuvé
+    else OTP invalide
+        OTPVerifier -> Client: notification de code OTP invalide
+    end
+else Credit refusé
+    Admin -> Popup: notifierRefus(Client, "Raison du refus")
+    Popup -> Client: affiche le message de refus
+end
+@enduml
